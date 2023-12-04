@@ -13,7 +13,7 @@ async function bootstrap() {
   app.use(timeout('50s'));
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
   const config = new DocumentBuilder()
-    .setTitle("Church")
+    .setTitle('Church')
     .setDescription('API documentation for Church ')
     .setVersion('1.0')
     .addBearerAuth()

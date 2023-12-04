@@ -7,7 +7,7 @@ import { FileController } from './file.controller';
 import { Audio } from '../audio/entities/audio.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([File,Audio]), CloudinaryModule],
+  imports: [TypeOrmModule.forFeature([File, Audio]), CloudinaryModule],
   providers: [FileService],
   controllers: [FileController],
   exports: [FileService],

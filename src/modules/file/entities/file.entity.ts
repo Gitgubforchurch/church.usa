@@ -12,4 +12,3 @@ export class File extends BaseEntity {
   @Column()
   publicId: string;
 }
-

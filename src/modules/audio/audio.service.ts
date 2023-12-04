@@ -7,28 +7,25 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { File } from '../file/entities/file.entity';
 import { FileService } from '../file/file.service';
-import {
-  BadRequestException,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 
 @Injectable()
-export class AudioService extends BaseService<Audio>{
+export class AudioService extends BaseService<Audio> {
   constructor(
     @InjectRepository(Audio)
-    private readonly audioRepo:Repository<Audio>,
+    private readonly audioRepo: Repository<Audio>,
     @InjectRepository(File)
     private readonly fileRepo: Repository<File>,
-    private readonly fileService: FileService
-  ){
-    super(audioRepo)
+    private readonly fileService: FileService,
+  ) {
+    super(audioRepo);
   }
 
-  async create(dto: CreateAudioDto){
-    const audio = new Audio()
-    audio.absorbFromDto(dto)
-    await this.audioRepo.save(audio)
-    return audio
+  async create(dto: CreateAudioDto) {
+    const audio = new Audio();
+    audio.absorbFromDto(dto);
+    await this.audioRepo.save(audio);
+    return audio;
   }
 
   // async createOneAudioPost(creatOneAudioPostDto: CreateAudioDto,file:Express.Multer.File){

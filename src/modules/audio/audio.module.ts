@@ -8,7 +8,11 @@ import { FileModule } from '../file/file.module';
 import { CloudinaryModule } from 'src/services/cloudinary/cloudinary.modules';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([Audio,File]),FileModule,CloudinaryModule],
+  imports: [
+    TypeOrmModule.forFeature([Audio, File]),
+    FileModule,
+    CloudinaryModule,
+  ],
   controllers: [AudioController],
   providers: [AudioService],
   // exports:[AudioService]

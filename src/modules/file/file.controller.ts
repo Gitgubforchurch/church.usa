@@ -30,8 +30,7 @@ export class FileController {
     },
   })
   @UseInterceptors(FileInterceptor('image'))
-  createImage(
-    @UploadedFile() file: Express.Multer.File) {
+  createImage(@UploadedFile() file: Express.Multer.File) {
     return this.fileService.createAudio(file);
   }
 

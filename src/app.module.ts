@@ -27,7 +27,7 @@ import { AudioModule } from './modules/audio/audio.module';
       inject: [ConfigService],
     }),
     FileModule,
-    AudioModule
+    AudioModule,
   ],
 })
 export class AppModule {}

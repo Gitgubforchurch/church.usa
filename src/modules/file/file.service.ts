@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { File } from './entities/file.entity'
+import { File } from './entities/file.entity';
 import { Repository } from 'typeorm';
 import { CloudinaryService } from '../../services/cloudinary/cloudinary.service';
 import { Audio } from '../audio/entities/audio.entity';
@@ -13,7 +13,7 @@ export class FileService {
     private readonly imagesRepository: Repository<File>,
     private readonly cloudinaryService: CloudinaryService,
     @InjectRepository(Audio)
-    private readonly audioRepo:Repository<Audio>,
+    private readonly audioRepo: Repository<Audio>,
   ) {}
 
   async createAudio(file: Express.Multer.File) {
@@ -26,5 +26,4 @@ export class FileService {
     image.url = cloudImage.secure_url;
     return this.imagesRepository.save(image);
   }
-  
 }

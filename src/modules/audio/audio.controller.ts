@@ -1,5 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete ,   UploadedFile,
-  UseInterceptors,} from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { AudioService } from './audio.service';
 import { CreateAudioDto } from './dto/create-audio.dto';
 import { UpdateAudioDto } from './dto/update-audio.dto';
@@ -12,8 +21,8 @@ export class AudioController {
   constructor(private readonly audioService: AudioService) {}
 
   @Post('create')
-  async createOne(@Body() dto: CreateAudioDto){
-    return await this.audioService.create(dto)
+  async createOne(@Body() dto: CreateAudioDto) {
+    return await this.audioService.create(dto);
   }
 
   // @Post('create')
