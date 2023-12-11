@@ -33,8 +33,18 @@
 
 version: '3'
 services:
+  db:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: church
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456789
+    ports:
+      - "5432:5432" # Маппинг порта PostgreSQL контейнера на порт хоста
+
   app:
-    build: .
+    image: church30-app # Замените на имя и тег вашего готового образа приложения
     ports:
       - "3000:3000" # Маппинг портов, где 3000 - порт вашего Nest.JS приложения
     restart: always
