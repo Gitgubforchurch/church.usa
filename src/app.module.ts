@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { FileModule } from './modules/file/file.module';
-import { AudioModule } from './modules/audio/audio.module';
+import { MediaModule } from './modules/media/media.module';
 
 @Module({
   imports: [
@@ -26,8 +25,7 @@ import { AudioModule } from './modules/audio/audio.module';
       }),
       inject: [ConfigService],
     }),
-    FileModule,
-    AudioModule,
+    MediaModule,
   ],
 })
 export class AppModule {}
