@@ -4,7 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as dotenv from 'dotenv';
 dotenv.config();
-const timeout = require('connect-timeout');
+import timeout from 'connect-timeout';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

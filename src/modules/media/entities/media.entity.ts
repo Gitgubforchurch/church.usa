@@ -23,4 +23,9 @@ export class Media extends BaseEntity {
     default: MediaTypeEnum.AUDIO,
   })
   type: MediaTypeEnum;
+
+  @Column({
+    default: false,
+  })
+  isDeleted: boolean;
 }

@@ -1,12 +1,13 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateMediaDto } from './dto/create-media.dto';
-import { UpdateMediaDto } from './dto/update-media.dto';
 import { BaseService } from 'src/base/base.service';
 import { Media } from './entities/media.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { SearchMediaDto } from './dto/search_media.dto';
 import { MediaTypeEnum } from './enum/media.enum';
+import { ListParamsDto } from 'src/base/dto/list-params.dto';
+import { ListDto } from 'src/base/dto/list.dto';
 
 @Injectable()
 export class MediaService extends BaseService<Media> {
@@ -47,5 +48,29 @@ export class MediaService extends BaseService<Media> {
     });
 
     return this.mediaRepository.save(newMedia);
+  }
+
+  async listByENum(listParamsDto: ListParamsDto, type: MediaTypeEnum) {
+    const array = await this.repository
+      .createQueryBuilder('media')
+      .where('media.type = :type', { type })
+      .limit(listParamsDto.limit)
+      .offset(listParamsDto.countOffset())
+      .orderBy(`media.${listParamsDto.getOrderedField()}`, listParamsDto.order)
+      .getMany();
+    const itemsCount = await this.repository.createQueryBuilder().getCount();
+    return new ListDto(array, {
+      page: listParamsDto.page,
+      itemsCount,
+      limit: listParamsDto.limit,
+      order: listParamsDto.order,
+      orderField: listParamsDto.orderField,
+    });
+  }
+
+  async deleteMedia(id: number) {
+    const mediaForDelete = await this.get(id);
+    mediaForDelete.isDeleted = true;
+    return await this.mediaRepository.delete({ id });
   }
 }

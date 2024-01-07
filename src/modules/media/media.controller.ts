@@ -3,19 +3,17 @@ import {
   Get,
   Post,
   Body,
-  Patch,
-  Param,
-  Delete,
   Query,
   UseInterceptors,
+  Delete,
+  Param,
 } from '@nestjs/common';
 import { MediaService } from './media.service';
-import { CreateMediaDto } from './dto/create-media.dto';
-import { UpdateMediaDto } from './dto/update-media.dto';
 import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { MediaTypeEnum } from './enum/media.enum';
 import { ListParamsDto } from 'src/base/dto/list-params.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { CreateMediaDto } from './dto/create-media.dto';
 
 @ApiTags('Media files')
 @Controller('media')
@@ -31,7 +29,7 @@ export class MediaController {
     return await this.mediaService.list(listParamsDto);
   }
 
-  @Post()
+  @Post('create')
   @ApiConsumes('multipart/form-data')
   @ApiOperation({ summary: 'Создание нового контента' })
   @ApiBody({
@@ -40,23 +38,23 @@ export class MediaController {
       properties: {
         title: {
           type: 'string',
-          example: 'Название достижения',
-          description: 'Название достижения',
+          example: 'Название медиа',
+          description: 'Название',
         },
         description: {
           type: 'string',
-          example: 'Достижение за проявленную отвагу и смелость',
-          description: 'Описание достижения',
+          example: 'Медиа на первом канале',
+          description: 'Описание',
         },
         media_url: {
           type: 'string',
-          example: 'Название достижения',
-          description: 'Название достижения',
+          example: 'Ссылка на медиа',
+          description: 'Ссылка',
         },
         type: {
           type: 'string',
           enum: [MediaTypeEnum.AUDIO, MediaTypeEnum.NEWS, MediaTypeEnum.VIDEO],
-          description: 'The type of media',
+          description: 'Тип',
         },
       },
     },
@@ -64,5 +62,22 @@ export class MediaController {
   @UseInterceptors(FileInterceptor('media_url'))
   async createMedia(@Body() createMediaDto: CreateMediaDto) {
     return await this.mediaService.createMedia(createMediaDto);
+  }
+
+  @Get('/sorted/by/type')
+  @ApiOperation({
+    summary: 'Получить сортированный по типу медиа',
+  })
+  async findUsersByStatus(
+    @Query() listParamsDto: ListParamsDto,
+    @Query('type') type: MediaTypeEnum,
+  ) {
+    return await this.mediaService.listByENum(listParamsDto, type);
+  }
+
+  @Delete(':id')
+  @ApiOperation({ summary: 'Удаление одного из медиа по его ID' })
+  async deleteMedia(@Param('id') id: number) {
+    return await this.mediaService.deleteMedia(id);
   }
 }
