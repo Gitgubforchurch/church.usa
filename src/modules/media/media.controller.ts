@@ -64,6 +64,12 @@ export class MediaController {
     return await this.mediaService.createMedia(createMediaDto);
   }
 
+  @Get()
+  @ApiOperation({ summary: 'Получить список типов медиа' })
+  async getTypes() {
+    return await this.mediaService.getMediaTypes();
+  }
+
   @Get('/sorted/by/type')
   @ApiOperation({
     summary: 'Получить сортированный по типу медиа',

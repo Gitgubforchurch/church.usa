@@ -73,4 +73,8 @@ export class MediaService extends BaseService<Media> {
     mediaForDelete.isDeleted = true;
     return await this.mediaRepository.delete({ id });
   }
+
+  async getMediaTypes() {
+    return MediaTypeEnum;
+  }
 }
