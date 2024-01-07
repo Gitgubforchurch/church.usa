@@ -75,6 +75,12 @@ export class MediaController {
     return await this.mediaService.listByENum(listParamsDto, type);
   }
 
+  @Get(':id')
+  @ApiOperation({ summary: 'Получить одно медиа по его ID' })
+  async getById(@Param('id') id: number) {
+    return await this.mediaService.get(id);
+  }
+
   @Delete(':id')
   @ApiOperation({ summary: 'Удаление одного из медиа по его ID' })
   async deleteMedia(@Param('id') id: number) {
