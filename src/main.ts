@@ -4,7 +4,8 @@ import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as dotenv from 'dotenv';
 dotenv.config();
-import timeout from 'connect-timeout';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const timeout = require('connect-timeout');
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
