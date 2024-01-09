@@ -12,7 +12,7 @@ import { MediaModule } from './modules/media/media.module';
       imports: [ConfigModule],
       useFactory: () => ({
         type: 'postgres',
-        url: 'postgres://whcyiziqkeuqah:d4f52c12df1dac6e95e98c023786ccaa655af12c15972e65faf9d9cb3f47faa3@ec2-44-206-204-65.compute-1.amazonaws.com:5432/d9vuo9nv3igbmd',
+        url: 'postgres://lwisezsnsjeaqu:e778927723bad18249f1698696a8c02956e9cb05980519f0d779e3853eba8a6a@ec2-34-195-81-92.compute-1.amazonaws.com:5432/dck73god9mu0pb',
         entities: ['dist/**/*.entity{.ts,.js}'],
         synchronize: true,
         extra: {
