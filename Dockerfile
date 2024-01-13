@@ -20,25 +20,3 @@ RUN npm run build
 
 # Start the server using the production build
 CMD [ "node", "dist/main.js" ]
-
-
-# # Используем образ Node.js
-# FROM node:latest
-
-# # Устанавливаем директорию приложения в контейнере
-# WORKDIR /usr/src/app
-
-# # Копируем зависимости проекта
-# COPY package*.json ./
-
-# # Устанавливаем зависимости
-# RUN npm install
-
-# # Копируем исходный код приложения
-# COPY . .
-
-# # Открываем порт, на котором работает ваше приложение
-# EXPOSE 3000
-
-# # Команда для запуска приложения при старте контейнера
-# CMD ["npm", "start"]
